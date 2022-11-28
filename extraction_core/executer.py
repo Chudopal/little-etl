@@ -13,26 +13,14 @@ from extraction_core.storage_handler import read, save_source_to_storage
 
 
 async def retreive_new_collection(config: Config, page: int, params: list[str]) -> tuple[dict]:
+    """Aggregate function for exctracting new data.
+    
+    The function check data in storage,
+    optimize external requests, and saves cash.
+    """
     characters = await _handle_characters(config, page)
     worlds = await _handle_worlds(config, characters)
     return _group_characters(extract(characters, worlds), params)
-
-
-def _group_characters(
-    characters: tuple[ExtractedCharacterModel],
-    params: tuple[str],
-) -> tuple[ExtractedCharacterModel | GroupingResult, ...]:
-    result = characters
-    if params:
-        counter = Counter([
-            tuple(character.dict().get(param) for param in params)
-            for character in characters
-        ])
-        result = tuple(
-            GroupingResult(**dict(zip(params+('count',), field + (count,))))
-            for field, count in counter.items()
-        )
-    return result
 
 
 async def _handle_characters(config: Config, page) -> tuple[Character]:
@@ -72,3 +60,20 @@ async def _handle_worlds(config: Config, characters: tuple[Character]) -> tuple[
     save_source_to_storage(config.file_storage, worlds)
 
     return worlds
+
+
+def _group_characters(
+    characters: tuple[ExtractedCharacterModel],
+    params: tuple[str],
+) -> tuple[ExtractedCharacterModel | GroupingResult, ...]:
+    result = characters
+    if params:
+        counter = Counter([
+            tuple(character.dict().get(param) for param in params)
+            for character in characters
+        ])
+        result = tuple(
+            GroupingResult(**dict(zip(params+('count',), field + (count,))))
+            for field, count in counter.items()
+        )
+    return result

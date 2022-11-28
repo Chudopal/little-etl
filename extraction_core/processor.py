@@ -21,7 +21,9 @@ class ExtractedCharacterModel(BaseModel):
 
 
 class GroupingResult(BaseModel):
-    """Common model for representation the character."""
+    """Common model for representation
+    result of characters' grouping.
+    """
 
     name: str | None
     date: date | None
@@ -69,7 +71,9 @@ def extract(
     characters_results: tuple[Character, ...],
     worlds_results: tuple[World, ...],
 ) -> tuple[ExtractedCharacterModel, ...]:
-    """Creates the internal model of character."""
+    """Creates the representational model of character
+    based on sequence of characters and worlds.
+    """
     return tuple(
         _create_extracted_model(character_source, worlds_results)
         for character_source in characters_results

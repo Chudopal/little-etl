@@ -14,6 +14,8 @@ from extraction_core.source_models import Character, World
 
 
 class StorageResponse(BaseModel):
+    """Basic model for parsing table data into models."""
+
     items: tuple[World | Character | ExtractedCharacterModel, ...]
 
 

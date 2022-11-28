@@ -12,6 +12,9 @@ def calculate_worlds_links(
     characters: tuple[Character, ...],
     saved_worlds: tuple[World, ...]
 ) -> set[AnyUrl]:
+    """Optimize the number of external
+    requests for receiving the worlds.
+    """
     saved_worlds_ids = {world.id for world in saved_worlds}
     return {
         _calculate_page(
@@ -28,6 +31,9 @@ def calculate_characters_links(
     characters: tuple[Character, ...],
     max_page: int,
 ) -> set[AnyUrl]:
+    """Optimize the number of external
+    requests for receiving the characters.
+    """
     return {
         _page_request_builder(
             starwars_service_config,

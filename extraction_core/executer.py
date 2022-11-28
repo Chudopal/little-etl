@@ -13,10 +13,10 @@ from extraction_core.storage_handler import read, save_source_to_storage
 
 
 async def retreive_new_collection(config: Config, page: int, params: list[str]) -> tuple[dict]:
-    """Aggregate function for exctracting new data.
+    """Aggregate function for extracting new data.
     
-    The function check data in storage,
-    optimize external requests, and saves cash.
+    The function checks data in storage,
+    optimizes external requests, and saves cash.
     """
     characters = await _handle_characters(config, page)
     worlds = await _handle_worlds(config, characters)

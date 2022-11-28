@@ -1,0 +1,1 @@
+This is a permanent storage for fetched data. This folder is required. Do not remowe it.

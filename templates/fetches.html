@@ -1,0 +1,17 @@
+<h3> If you wanna accumulate some fields, please use address line. For example the query ?homeworld&gender will show you the number of characters with given homeworld and gender. I am not a frontend developer, sorry =) </h3>
+<h3> Also if you wanna download something, just type download after the page number and before question mark(?) in address line. For example the query http://127.0.0.1:8000/characters/3/download?homeworld&gender will download a csv file with given params.</h3>
+
+<table>
+    <tr>
+        {% for column in columns %}
+            <th> {{column}}</th>
+        {% endfor %}
+    </tr>
+    {% for result in results %}
+    <tr>
+        {% for value in result.values %}
+            <th> {{value}}</th>
+        {% endfor %}
+    </tr> 
+    {% endfor %}
+</table>

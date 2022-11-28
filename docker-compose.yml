@@ -1,0 +1,13 @@
+
+version: '3'
+services:
+  starwars:
+    image: starwars
+    command: uvicorn little_etl.asgi:application --host 0.0.0.0 --port 8000
+    environment:
+      - CONFIG_PATH=./config.yaml
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
